@@ -1,1 +1,1 @@
-Sitemap: http://www.haleydaarstad.com/POL051/sitemap.xml
+Sitemap: http://POL051.github.io/sitemap.xml

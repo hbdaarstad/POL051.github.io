@@ -1,0 +1,19 @@
+---
+title: "Picturing the Data"
+editor: visual
+---
+
+The `head()` and `str()` allow us to get a snap shot of the data and see what is in it and what data types we are working with. `head()` shows us the first six observations of each variable, while `str()` shows us the structure of each variable.
+
+```{r}
+library(RandomData)
+
+dat <- race_stats
+
+head(dat)  
+```
+
+```{r}
+str(dat) # structure of dataset
+
+```

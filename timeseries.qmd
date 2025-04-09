@@ -1,0 +1,51 @@
+---
+title: "Times Series"
+editor: visual
+---
+
+## Time Series
+
+A time series plot looks at a variable over time to see trends. To make a time series graph, we use the same function as scatter plots, `plot()`, however, we change the type of graph from a point to a line graph. We can do this by changing the `type =` in the function from a `type = "p"` to a `type = "l"`. In addition, the variable on the x-axis should always be a variable that measures time.
+
+```{r}
+
+library(tidyverse)
+library(RandomData)
+
+# Time Series Plot
+# plot(data$y ~ data$timevariable,
+#                type ="l",
+#                col = "color", 
+#               main = "Main Title",
+#               ylab = "Label Y-axsis",
+#               xlab = "Label X-axsis")
+
+```
+
+In the following example, we look at the total wins for Ferrari drivers over time.
+
+```{r}
+
+# Calculate total wins per year for Ferrari
+ferrari_wins <- constructors_stats |>
+  filter(constructor == "Ferrari") |>
+  group_by(year) |> 
+  summarize(total_wins = sum(max(constructor_wins)))
+
+## Make Time Series plot
+plot(ferrari_wins$total_wins ~ ferrari_wins$year,
+     # make it a line not points
+     type = "l", 
+     # add color
+     col = c("red"), 
+     # change width of the line
+     lwd = 2, 
+     # add main title
+     main = "Ferrari Wins 1958 to 2024 (Before the Summer Break)",
+      # add title on x-axsis
+     xlab = "Year", 
+      # add title on y-axsis
+     ylab = "Wins")
+```
+
+## 

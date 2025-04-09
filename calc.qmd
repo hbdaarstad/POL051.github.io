@@ -1,0 +1,26 @@
+---
+title: "Basic Calculations"
+editor: visual
+---
+
+R at its core is a gigantic calculator, so let's practice doing basic calculations.
+
+```{r}
+
+# addition
+10 + 2
+
+# subtraction
+10 - 2
+
+# multipilication
+10 * 2
+
+# division
+10/2
+
+# exponent
+10^2
+
+
+```

@@ -1,0 +1,26 @@
+---
+title: "Creating Objects"
+editor: visual
+---
+
+In R, we save our data in what we call objects! Objects store information about different types of elements. If you know any other coding languages, they typically call these variables.
+
+```{r}
+
+# The <- saves the caculation as math
+math <- 10 + 2
+#print()
+print(math)
+
+```
+
+```{r}
+
+# The = saves the caculation as math
+math = 10 + 2
+# print() will print out what is saved in the object math
+print(math)
+
+```
+
+##  {#data-types}

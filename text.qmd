@@ -1,0 +1,22 @@
+---
+title: "Writing out Text vs. Numbers"
+editor: visual
+---
+
+In R, to output text you will use single or double quotes:
+
+```{r}
+
+"Hello World!"
+'Hello World!' 
+
+```
+
+To output numbers you just type out the number. Also, note that I do not use a comma when writing out my four-digit number:
+
+```{r}
+
+5
+75
+1000
+```

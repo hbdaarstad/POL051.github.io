@@ -1,0 +1,37 @@
+---
+title: "Introduction to R"
+editor: visual
+---
+
+## Why R?
+
+R is a coding language language and environment built for statistical computing and graphics that includes a large variety in statistical and graphical techniques. Essentially, R gives us as political scientists an effective way to store and handle data, and a large selection of data analysis tools including graphing tools in a coherent and effective language. R has its own "enviornment," an area for us to write the code and see outputs, but the majority of users will use Rstudio and IDE or integrated development environment. Rstudio is a software application with a code editor, compiler, debugger, and project manager in a single interface that allows us to write, edit, compile, and debug code in a singular location. Furthermore, in order to use R and Rstudio you will need to download both.\
+
+## Downloading R
+
+R is freely maintained by an international team of developers and is available through *The Comprehensive R Archive Network*. Follow the instructions below to download R. If you are using an older computer or iPad, skip to **1.4 Using Posit Cloud for R**.
+
+-   Go to The Comprehensive R Archive Network webpage:
+    -   <https://cran.r-project.org>
+-   To install R on Windows, click the "Download R for Windows" link.
+-   To install R on a Mac, click the "Download R for Mac" link.
+
+## Downloading RStudio
+
+One way to picture what RStudio does is to compare it to Microsoft Word, a software application that allows us to write documents. RStudio, instead of being a platform to write text, helps us write in the coding language R. Follow the instructions below to download RStudio.
+
+-   Go to the [Posit RStudio Desktop page](https://posit.co/download/rstudio-desktop/).
+-   To install for Mac:
+    -   Scroll to the button that says "Install R on a Mac," and click the “Download R for Mac OS 13+” link.
+    -   If you're using an older version, click the "Previous Versions" link to find a version that works with your computer.
+-   To install for Windows:
+    -   Scroll to the button that says "Install R on Windows 10/11," and click the link to download.
+
+## Using Posit Cloud for R
+
+Posit Cloud is the most common cloud service used when working with RStudio and is free up to a point.
+
+-   First, choose the “Cloud Free” plan.
+-   Second, follow the Posit Cloud instructions to log in.
+-   Third, go to the "Tutorial" tab in the upper right corner, scroll to the bottom, and select “Getting Started with Tutorials,” then press the “Start Tutorial” button.
+-   You will work in a singular RProject space for the majority of the class.

@@ -1,0 +1,45 @@
+---
+title: "Packages and Installing Packages"
+editor: visual
+---
+
+**Packages** are collections of R functions, data, and code compiled in a well-defined format. **R functions** are like the verbs of the R coding language, they tell your computer what action to make with sets of information. A function is usually defined by a keyword and then parenthesis. Functions can be built by yourself or pre-built.
+
+Some packages come pre-installed in R, however, the majority do not, so you need to install them first using the r function `install.packages`
+
+```{r}
+#| eval: false
+#| include: true
+
+install.packages("tidyverse") # first install this package
+install.packages("remotes") # second install this package to download the data
+
+```
+
+After installing the packages we need to attach the package. You will always need to reattach the a package in order to use it when you restart R. You can do this by using the function `library()` and the name of the package.
+
+In the following examples we will be using a collection of data sets I have cleaned and you will download by using the following code:
+
+```{r}
+#| eval: false
+#| include: true
+# This line of code installs a data package saved on github that I
+# created
+remotes::install_github("hbdaarstad/RandomData")
+
+```
+
+```{r}
+#| include: false
+# attaches the packages
+library(tidyverse)
+library(RandomData)
+```
+
+Now, we can begin using functions found in the `tidyverse` package and data from my package `RandomData`. Let's work with our first data set, `race_stats`.
+
+```{r}
+?race_stats # description of the data
+```
+
+![](pictures/package_descriptions.png){width="100%"}

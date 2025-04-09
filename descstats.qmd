@@ -1,0 +1,64 @@
+---
+title: "Descriptive Statistics Using Tidyverse"
+editor: visual
+---
+
+Now that we know some basic ways to manipulate the data frame, lets look at different way to do basic descriptive statistics! In this section we will be using the function, `summarize()`. This function is similar to the mutate function, except instead of adding a variable, it makes a new data frame based on existing variables. You will also see the function `group_by()`. This function allows us to organize the data by telling it to group things by a variable(s). Essentially, the functions splits things into groups.
+
+For this example we are going to find the total points for each team in the 2023 season!
+
+```{r}
+
+library(tidyverse)
+library(RandomData)
+
+TeamStandings_2023 <- race_stats |>
+  select(circuit, year, constructor, surname, points) |>
+  # remove duplicates
+  unique() |>
+  filter(year==2023) |>
+  group_by(constructor) |>
+  summarize(
+    total_points = sum(points)
+  )
+
+print(TeamStandings_2023)
+```
+
+```{r}
+
+TeamStandings_2023 <- race_stats |>
+  select(circuit, year, constructor, surname, points) |>
+  # remove duplicates
+  unique() |>
+  filter(year==2023) |>
+  group_by(constructor) |>
+  summarize(
+    total_points = sum(points)
+  ) |>
+  arrange(desc(total_points))
+
+print(TeamStandings_2023)
+
+```
+
+What if we wanted to know the percentage of points each driver contributed to the teams total?
+
+```{r}
+
+TeamStandings_2023 <- race_stats |>
+  select(circuit, year, constructor, surname, points) |>
+  # remove duplicates
+  unique() |>
+  filter(year==2023) |>
+  group_by(constructor) |>
+  mutate(total_points = sum(points, na.rm = TRUE)) |>
+  ungroup() |>  # Ungroup to avoid issues with the next group_by
+  group_by(surname) |>
+  summarize(
+  perc_points = sum(points, na.rm = TRUE) / unique(total_points) * 100)  |>
+  arrange(desc(perc_points))
+
+print(TeamStandings_2023)
+
+```

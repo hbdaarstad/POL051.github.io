@@ -1,0 +1,97 @@
+---
+title: "More Adv. Code"
+editor: visual
+---
+
+## More Adv. Code for Base R Visualization
+
+Now that you know the basics, we can add more details and change things.
+
+I have provided some examples. In the first example, I add three different box plots with different colors and I adjust opacity of the colors.
+
+```{r}
+
+library(tidyverse)
+library(RandomData)
+
+## BOX PLOT ##
+
+# Wrangle the Data
+thebigthree <- constructors_stats |>
+  # Filter for the top 3 constructors since 2016 
+  filter((constructor == "Mercedes" | constructor == "Red Bull" | constructor == "Ferrari") &            year > 2016)  |>
+  # calculate total wins per year per constructor
+  group_by(constructor, year) |> 
+  summarize(total_wins = sum(constructor_wins))
+
+
+# Create boxplot
+boxplot(total_wins ~ constructor, 
+        data = thebigthree,
+        main = "The Big Three Constructor Wins Since 2016",
+        xlab = "Constructor",
+        ylab = "Wins",
+        col = c(adjustcolor("red", alpha.f = 0.4), # alpha.f adjusts the opacity
+                adjustcolor("grey", alpha.f = 0.4),
+                adjustcolor("blue", alpha.f = 0.4)))
+
+
+
+```
+
+In my second example, I add two more lines to my time series graph, change their colors, and also add a legend.
+
+```{r}
+
+## TIME SERIES ##
+
+# Wrangle the Data
+
+# Avg wins for all drivers since 2006
+avg_wins <- driver_stats |>
+    filter(year > 2006) |>
+    group_by(surname, year) |> 
+    summarize(
+      max_wins = max(driver_wins)) |>
+    ungroup() |>
+    group_by(year) |>
+  summarize(
+      total_wins = mean(max_wins))
+
+# Avg wins for Lewis Hamilton since joining the grid in 2007
+hamilton <- driver_stats |>
+  # Filter for the Lewis Hamilton
+  filter(surname == "Hamilton")  |>
+  # calculate total wins per year for Hamilton
+  group_by(year) |> 
+  summarize(total_wins = sum(max(driver_wins)))
+
+# Avg wins for Max Verstappen since joining the grid in 2015
+verstappen <- driver_stats |>
+  # Filter for Max Verstappen
+  filter(surname== "Verstappen")  |>
+  # calculate total wins per year for Verstappen
+  group_by(year) |> 
+  summarize(total_wins = sum(max(driver_wins)))
+
+# Create Time Series Plot
+plot(avg_wins$year, avg_wins$total_wins, type = "l",
+     col = "grey",
+     main = "Total Wins Over Time",
+     xlab = "Year",
+     ylab = "Total Wins",
+     ylim = range(c(avg_wins$total_wins,
+                    hamilton$total_wins,
+                    verstappen$total_wins
+     )))
+    
+
+# Add lines for Hamilton and Verstappen
+lines(hamilton$year, hamilton$total_wins, col = "turquoise", type = "l")
+lines(verstappen$year, verstappen$total_wins, col = "red", type = "l")
+
+# Add a legend to the plot
+legend("topleft", legend = c("Avg.", "Hamilton", "Verstappen"),
+       col = c("grey", "turquoise", "red"), lty = 1, cex = 0.8)
+
+```

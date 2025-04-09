@@ -1,0 +1,80 @@
+---
+title: "Data Types"
+editor: visual
+---
+
+There are 6 types of data in R that are important to know, but the essential ones are logical, numeric, and character.
+
+**Logical** Also known as boolean data, logical data is shown as TRUE or FALSE values:
+
+```{r}
+logical1 <- TRUE
+logical2 <- FALSE
+
+# The class() function outputs the data type of the object
+class(logical1)
+
+
+print(logical2)
+print(class(logical2))
+
+```
+
+**Numeric** represents all data types that are real numbers with or with out decimal points.
+
+```{r}
+
+height <- 5.5
+acres <- 1000
+
+class(height)
+
+
+print(acres)
+print(class(acres))
+
+
+```
+
+**Character** specifies character or string values in a variable such as a singular character 'A' or a string of characters in 'Apple'.
+
+```{r}
+
+# Use '' or "" to show it's a string of characters
+motorsports <- "formula1"
+
+print(motorsports)
+print(class(motorsports))
+
+
+```
+
+**Integer** specifies real values without decimal points
+
+```{r}
+
+
+# the suffix i specifies its imaginary data.
+complex <- 3 + 2i
+
+print(class(integer))
+
+```
+
+**Raw** specifies values as raw bytes
+
+```{r}
+
+# convert character to raw
+raw_variable <- charToRaw("Welcome to Programiz")
+
+print(raw_variable)
+print(class(raw_variable))
+
+# convert raw to character
+char_variable <- rawToChar(raw_variable)
+
+print(char_variable)
+print(class(char_variable))
+
+```

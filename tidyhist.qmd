@@ -1,0 +1,103 @@
+---
+title: "Histograms"
+editor: visual
+---
+
+## Histograms
+
+In `ggplot2` to build a histogram we put `geom_histogram()` and we only one numeric variable is needed in the input. In the following example, we will look at the distribution of the final positions of the McLaren 2023 season for both of their drivers. To set up this histogram, I construct a new variable called, `final_position`, and save it as a new object called `McLarenStandings_2023.`
+
+```{r}
+#| include: false
+library(tidyverse)
+library(RandomData)
+
+McLarenStandings_2023 <- race_stats |>
+  select(circuit, year, constructor, surname) |>
+  # remove duplicates
+  unique() |>
+  filter(constructor == "McLaren" & year == 2023) |>
+  mutate(
+    final_position = case_when(
+      #PIASTRI
+      circuit == "Bahrain International Circuit" & surname == "Piastri" ~ "DNF",
+      circuit == "Jeddah Corniche Circuit" & surname == "Piastri" ~ "15",
+      circuit == "Albert Park Grand Prix Circuit" & surname == "Piastri" ~ "8", 
+      circuit ==  "Baku City Circuit" & surname == "Piastri" ~ "11",
+      circuit ==  "Miami International Autodrome" & surname == "Piastri" ~ "19",
+      circuit == "Circuit de Monaco" & surname == "Piastri" ~ "10",
+      circuit == "Circuit de Barcelona-Catalunya" & surname == "Piastri" ~ "13",
+      circuit == "Circuit Gilles Villeneuve" & surname == "Piastri" ~ "11", 
+      circuit == "Red Bull Ring" & surname == "Piastri" ~ "16",
+      circuit == "Silverstone Circuit" & surname == "Piastri" ~ "4",
+      circuit == "Hungaroring" & surname == "Piastri" ~ "5",
+      circuit == "Circuit de Spa-Francorchamps" & surname == "Piastri" ~ "DNF",
+      circuit == "Circuit Park Zandvoort" & surname == "Piastri" ~ "9",
+      circuit == "Autodromo Nazionale di Monza" & surname == "Piastri" ~ "12",
+      circuit == "Marina Bay Street Circuit" & surname == "Piastri" ~ "7",
+      circuit == "Suzuka Circuit" & surname == "Piastri" ~ "3",
+      circuit == "Losail International Circuit" & surname == "Piastri" ~ "2",
+      circuit == "Circuit of the Americas" & surname == "Piastri" ~ "DNF",
+      circuit == "Autódromo Hermanos Rodríguez" & surname == "Piastri" ~ "8",
+      circuit == "Autódromo José Carlos Pace" ~ "14",
+      circuit == "Las Vegas Strip Street Circuit" & surname == "Piastri" ~ "10",
+      circuit == "Yas Marina Circuit" & surname == "Piastri" ~ "6",
+        
+        # NORRIS
+        circuit == "Bahrain International Circuit" & surname == "Norris" ~ "17",
+        circuit == "Jeddah Corniche Circuit" & surname == "Norris" ~ "17",
+        circuit == "Albert Park Grand Prix Circuit" & surname == "Norris" ~ "6",
+        circuit ==  "Baku City Circuit" & surname == "Norris" ~ "9",
+        circuit ==  "Miami International Autodrome" & surname == "Norris" ~ "17", 
+        circuit == "Circuit de Monaco" & surname == "Norris" ~ "9", 
+        circuit == "Circuit de Barcelona-Catalunya" & surname == "Norris" ~ "17", 
+        circuit == "Circuit Gilles Villeneuve" & surname == "Norris" ~ "13",
+        circuit == "Red Bull Ring" & surname == "Norris" ~ "4", 
+        circuit == "Silverstone Circuit" & surname == "Norris" ~ "2",
+        circuit == "Hungaroring" & surname == "Norris" ~ "2",
+        circuit == "Circuit de Spa-Francorchamps" & surname == "Norris" ~ "7",
+        circuit == "Circuit Park Zandvoort" & surname == "Norris" ~ "9",
+        circuit == "Autodromo Nazionale di Monza" & surname == "Norris" ~"8",
+        circuit == "Marina Bay Street Circuit" & surname == "Norris" ~ "2",
+        circuit == "Suzuka Circuit" & surname == "Norris" ~ "2",
+        circuit == "Losail International Circuit" & surname == "Norris" ~ "3",
+        circuit == "Circuit of the Americas" & surname == "Norris" ~ "3",
+        circuit == "Autódromo Hermanos Rodríguez" & surname == "Norris" ~ "5",
+        circuit == "Autódromo José Carlos Pace" ~ "2",
+        circuit == "Las Vegas Strip Street Circuit" & surname == "Norris" ~ "DNF",
+        circuit == "Yas Marina Circuit" & surname == "Norris" ~ "5"
+        )
+  ) |> mutate(final_position_numeric = as.numeric(final_position))
+```
+
+```{r}
+
+
+McLarenStandings_2023 <- McLarenStandings_2023 |>
+  mutate(final_position_numeric = ifelse(final_position == "DNF", 0, as.numeric(final_position)))
+
+ggplot(McLarenStandings_2023, aes(x = final_position_numeric)) +
+  ## we use fill for bars not color and we can adjust bins here
+  geom_histogram(fill = "orange", bins = 10) +
+  labs(
+        title = "McLaren Race Results 2023", 
+        x = "Race Results", 
+        y = "Count") +
+  theme_minimal()
+
+
+```
+
+-   `aes(x = final_position_numeric)`: Defines the variable for the histogram.
+
+-   `geom_histogram()`: Creates the histogram.
+
+-   `fill = "orange"`: Fills the bars with orange.
+
+-   `bins = 10`: Adjust the number of bins (change as needed).
+
+-   `labs()`: Adds title and axis labels.
+
+-   `theme_minimal()`: Uses a cleaner theme.
+
+In a histogram, **bins** represent the intervals (or ranges) into which data points are grouped. Each bin covers a specific range of values, and the height of the bar represents the number of observations (or frequency) that fall within that range.

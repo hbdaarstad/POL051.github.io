@@ -1,0 +1,23 @@
+---
+title: "Layout of R"
+---
+
+There are four primary quadrants in RStudio:
+
+- **Source pane**
+- **Console pane**
+- **Environment pane**
+- **Output pane**
+
+![RStudio Layout](pictures/layout.png)
+
+The **source pane** allows us to edit and view various code-related files, such as `.R`, `.rmd`, `.qmd`, `.py`, `.css`, or general text files such as `.txt` or `.md`.
+
+- To open an existing file, use either the **File → Open File...** menu or the **Recent Files** menu to select from recently opened files.
+- You can create a new file via the **File → New File** menu.
+
+The **console pane** provides an area to interactively execute code.
+
+The **environment pane** includes the Environment, History, Connections, Build, and Version Control System (VCS) tabs and displays any currently saved objects.
+
+The **output pane** displays various outputs, such as plots, and contains the Files, Plots, R Packages, Help, Tutorial, Viewer, and Presentation tabs.

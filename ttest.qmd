@@ -1,0 +1,209 @@
+---
+title: "T-Tests"
+---
+
+**Difference of Means**: A t-test compares the means of two groups. If you expect a specific difference between the two group means (e.g., one group is greater or lesser than the other), you should consider whether this difference is one-sided or two-sided:
+
+-   **One-tailed t-test**: Used when you expect the difference in one specific direction (e.g., group1 \> group2 or group1 \< group2).
+
+-   **Two-tailed t-test**: Used when you're interested in testing if there is any significant difference between the means, regardless of the direction of the difference.
+
+When choosing between a two-tailed or one-tailed t-test, it is crucial to determine whether your hypothesis suggests a directional difference—meaning, do you expect one group to be higher or lower than the other? If your hypothesis is directional, you should use a one-tailed t-test and specify one of the following options for the alternative argument:
+
+1.  If you expect Group 1 to have higher values than Group 2: `t.test(group1, group2, alternative = "greater")`
+
+2.  If you expect Group 1 to have lower values than Group 2: `t.test(group1, group2, alternative = "less")`
+
+3.  If you're testing for any difference without specifying a direction: `t.test(group1, group2, alternative = "two.sided")`
+
+#### Example 1:
+
+A political science research team conducted a study to evaluate the impact of a new voter mobilization campaign in two countries: **Country 1** and **Country 2**. The goal of the campaign was to increase voter turnout in elections, particularly among underrepresented groups. To assess the effectiveness of the campaign, the researchers established two groups in each country:
+
+-   **Treatment Group**: Individuals who were exposed to the new voter mobilization campaign.
+
+-   **Control Group**: Individuals who were not exposed to the campaign (received no special outreach or encouragement).
+
+The researchers hypothesized that the voter mobilization campaign would significantly increase voter turnout in both countries.
+
+Using a random sample of 100 individuals from each group in both countries, the team collected data on voter turnout, measured as the percentage of individuals who voted in the last election. Below are the generated data distributions for each group:
+
+1.  **Country 1**:
+
+    -   **Treatment Group**: 100 individuals who were exposed to the mobilization campaign, with an average voter turnout of 50% (standard deviation of 10%).
+
+    -   **Control Group**: 100 individuals who were not exposed to the campaign, with an average voter turnout of 45% (standard deviation of 10%).
+
+2.  **Country 2**:
+
+    -   **Treatment Group**: 100 individuals who were exposed to the mobilization campaign, with an average voter turnout of 52% (standard deviation of 9%).
+
+    -   **Control Group**: 100 individuals who were not exposed to the campaign, with an average voter turnout of 43% (standard deviation of 8%).
+
+The research team proposed the following hypotheses:
+
+-   **Null Hypothesis (H0)**: There is no significant difference in voter turnout between the treatment and control groups in either country.
+
+-   **Alternative Hypothesis (H1)**: The treatment group will have a significantly higher voter turnout compared to the control group in each country.
+
+```{r}
+# Set seed for reproducibility
+set.seed(123)
+
+# Generate random data for two groups
+country1_treat <- rnorm(100, mean = 50, sd = 10) 
+country1_control <- rnorm(100, mean = 45, sd = 10)   
+
+country2_treat <- rnorm(100, mean = 52, sd = 9) 
+country2_control <- rnorm(100, mean = 43, sd = 8)   
+```
+
+```{r}
+# Conducting t-tests
+countryA_ttest <- t.test(country1_treat, country1_control,
+alternative = "greater")
+
+countryB_ttest <- t.test(country2_treat, country2_control,
+alternative = "greater")
+```
+
+```{r}
+
+# printing results
+countryA_ttest
+```
+
+The results indicate that there is a **statistically significant** difference between the treatment and control groups in **Country 1**.
+
+```{r}
+# printing results
+countryB_ttest
+```
+
+The results for **Country 2** indicate an even stronger **statistically significant** difference between the treatment and control groups compared to **Country 1**.
+
+### Example 2:
+
+A group of **International Relations** scholars is conducting a study to evaluate the effect of **foreign aid** on **democratic engagement** in developing countries. The scholars hypothesize that countries receiving **foreign aid** with conditions attached, such as promoting democratic reforms, will show l**ower levels of political apathy** and **higher levels of civic participation** compared to countries that do not receive such aid.
+
+The research involves two groups:
+
+-   **Group 1 (Treatment Group)**: Countries that received **foreign aid with democratic promotion conditions** (e.g., aid for governance reforms, anti-corruption measures, or election monitoring programs).
+
+-   **Group 2 (Control Group)**: Countries that did not receive foreign aid or received aid without any democratic conditions.
+
+The researchers expect that **Group 1** will have **higher levels of democratic engagement** (measured by indicators such as voter turnout, political knowledge, and civil liberties) than **Group 2**, which may not benefit from the same level of external pressure or support for democratic reforms.
+
+### **Data Generation:**
+
+To test this hypothesis, the research team randomly samples **100 countries** for each group, measuring **voter turnout** as a key indicator of democratic engagement in the most recent national elections. The data is simulated as follows:
+
+1.  **Group 1 (Treatment Group)**:
+
+    -   **Average Voter Turnout**: 60% (mean score) with some variation (standard deviation = 10%).
+
+    -   These countries received foreign aid with democratic promotion conditions.
+
+2.  **Group 2 (Control Group)**:
+
+    -   **Average Voter Turnout**: 50% (mean score) with some variation (standard deviation = 10%).
+
+    -   These countries did not receive foreign aid with democratic promotion conditions.
+
+### **Hypothesis:**
+
+-   **Null Hypothesis (H0)**: There is no significant difference in voter turnout between countries that received aid with democratic promotion and those that did not.
+
+-   **Alternative Hypothesis (H1)**: The treatment group (Group 1) has **higher voter turnout** than the control group (Group 2) due to the impact of foreign aid and democratic reforms (i.e., Group 1's mean is greater than Group 2's mean).
+
+```{r}
+# Generate random data for two groups
+group1 <- rnorm(100, mean = 40, sd = 10)  # Group 1 with mean 40 and sd 10
+group2 <- rnorm(100, mean = 50, sd = 10)  # Group 2 with mean 50 and sd 10
+
+# Conducting t-tests
+ttest <- t.test(group1, group2,
+alternative = "less")
+
+ttest
+```
+
+### Interpreting One-Tailed T-test Results
+
+1.  **t-Value (t = -8.7109):**\
+    The t-value is the test statistic that measures the difference between the sample means relative to the variation in the sample data. A larger absolute t-value indicates a more significant difference between the two groups. Here, the t-value of -8.7109 is quite large (in negative value), suggesting a substantial difference between the means of the two groups, with **Group 1** (mean = 38.50) being significantly lower than **Group 2** (mean = 51.06).
+
+2.  **Degrees of Freedom (df = 197.94):**\
+    The degrees of freedom (df) represent the number of independent values in the calculation. For the Welch Two Sample t-test, this value is based on the sample sizes and variances of both groups. In this case, the degrees of freedom is approximately 197.94.
+
+3.  **p-Value (p-value = 5.988e-16):**\
+    The p-value represents the probability of obtaining results as extreme as the observed results, assuming the null hypothesis is true. For a one-tailed test, a p-value less than 0.05 suggests that the observed difference is statistically significant in the specified direction. Here, the p-value is **5.988e-16**, which is far smaller than 0.05. This indicates that we can confidently reject the null hypothesis and conclude that the true difference in means is significantly less than zero—**Group 1** has lower values than **Group 2**.
+
+4.  **Alternative Hypothesis:**\
+    The alternative hypothesis posits that the true difference in means is **less than 0**, meaning **Group 1** has a lower mean than **Group 2**. Given the extremely small p-value, there is strong evidence in support of this alternative hypothesis.
+
+5.  **95% Confidence Interval (-Inf, -10.17328):**\
+    The 95% confidence interval shows the range within which we are 95% confident that the true difference in means lies. In a one-tailed test, the interval is one-sided, extending from negative infinity to approximately **-10.17**. Since the interval does not include 0, this reinforces the conclusion that the mean of **Group 1** is significantly lower than the mean of **Group 2**.
+
+6.  **Sample Estimates:**
+
+    -   **Mean of Group 1 (x)**: 38.50
+
+    -   **Mean of Group 2 (y)**: 51.06
+
+The results indicate a strong **statistically significant** difference between the treatment and control groups, thus we can reject the null hypothesis.
+
+### Example 3
+
+A **comparative politics** research team is studying the impact of **political system types** (democracy vs. authoritarianism) on **citizen satisfaction with governance**. The team is specifically interested in understanding if there is a significant difference in how citizens from democratic countries (Group 1) and authoritarian countries (Group 2) perceive their government's performance, particularly in terms of economic stability, personal freedoms, and governance effectiveness.
+
+To explore this, the researchers conducted a survey asking citizens from two sets of countries:
+
+-   **Group 1 (Democratic Countries)**: Citizens from countries with democratic systems.
+
+-   **Group 2 (Authoritarian Countries)**: Citizens from countries with authoritarian systems.
+
+The **survey scale** measures **satisfaction** with governance on a scale from 0 to 100, where higher values indicate greater satisfaction with the government’s performance.
+
+### **Hypothesis:**
+
+-   **Null Hypothesis (H0)**: There is no significant difference in **citizen satisfaction** between democratic and authoritarian countries (i.e., the means are equal).
+
+-   **Alternative Hypothesis (H1)**: There is a significant difference in **citizen satisfaction** between democratic and authoritarian countries (i.e., the means are different).
+
+```{r}
+# Generate random data for two groups
+group1 <- rnorm(100, mean = 43, sd = 10)  # Group 1 with mean 43 and sd 10
+group2 <- rnorm(100, mean = 45, sd = 10)  # Group 2 with mean 45 and sd 10
+
+# Conducting t-tests
+ttest <- t.test(group1, group2,
+alternative = "two.sided")
+
+ttest
+```
+
+### Interpreting Two-Tailed T-test Results:
+
+1.  **t-Value (t = -0.59518)**:\
+    The t-value is the test statistic for the t-test, which measures how large the difference between the two groups is relative to the variability in the sample data. A larger absolute t-value indicates a more significant difference. In this case, the t-value of **-0.59518** is relatively small, suggesting that there is no substantial difference between the two groups.
+
+2.  **Degrees of Freedom (df = 197.82)**:\
+    Degrees of freedom (df) is a parameter used in statistical tests that reflects the number of independent values used in the calculation. For the Welch Two Sample t-test, the degrees of freedom depend on the sample sizes and variances of the two groups. Here, the degrees of freedom are approximately 197.82.
+
+3.  **p-Value (p-value = 0.5524)**:\
+    The p-value represents the probability of obtaining results as extreme as the ones observed, assuming the null hypothesis is true. A p-value below 0.05 typically suggests that the observed difference is statistically significant. With a p-value of **0.5524** (much smaller than 0.05), we cannot reject the null hypothesis, concluding that there is no statistically significant difference between the means of the two groups.
+
+4.  **Alternative Hypothesis**:\
+    The alternative hypothesis posits that the true difference in means is not equal to 0. Given the very low p-value, we have enough evidence to support this alternative hypothesis.
+
+5.  **95% Confidence Interval (-3.761971, 2.017620)**:\
+    The 95% confidence interval provides a range in which we are 95% confident that the true difference in means lies. In this case, the interval spans from about -3.76 to 2.02. Since the interval does not include 0, it strengthens the conclusion that there is a significant difference between the two groups' means.
+
+6.  **Sample Estimates**:
+
+    -   **Mean of x**: 43.93590
+
+    -   **Mean of y**: 44.80807
+
+The results indicate no **statistically significant** difference between the treatment and control groups, thus we cannot reject the null hypothesis.

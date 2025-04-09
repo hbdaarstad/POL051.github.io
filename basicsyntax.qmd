@@ -1,0 +1,161 @@
+---
+title: "rsyntax"
+---
+
+In this section, we will cover the following topics:
+
+## Writing out Text vs. Numbers {#writing-out-text-vs-numbers}
+
+In R, to output text you will use single or double quotes:
+
+```{r}
+
+"Hello World!"
+'Hello World!' 
+
+```
+
+To output numbers you just type out the number. Also, note that I do not use a comma when writing out my four-digit number:
+
+```{r}
+
+5
+75
+1000
+
+```
+
+## Basic Calculations {#basic-calculations}
+
+R at its core is a gigantic calculator, so let's practice doing basic calculations.
+
+```{r}
+
+# addition
+10 + 2
+
+# subtraction
+10 - 2
+
+# multipilication
+10 * 2
+
+# division
+10/2
+
+# exponent
+10^2
+
+
+```
+
+## Comments {#comments}
+
+It's also important to annotate your code. It will help you write notes and explain what you are doing. To annotate your code, you will use the number sign #:
+
+```{r}
+
+# addition
+10 + 2
+# the answer is 12
+```
+
+## Creating Objects {#creating-objects}
+
+In R, we save our data in what we call objects! Objects store information about different types of elements. If you know any other coding languages, they typically call these variables.
+
+```{r}
+
+# The <- saves the caculation as math
+math <- 10 + 2
+#print()
+print(math)
+
+```
+
+```{r}
+
+# The = saves the caculation as math
+math = 10 + 2
+# print() will print out what is saved in the object math
+print(math)
+
+```
+
+## Data Types {#data-types}
+
+There are 6 types of data in R that are important to know, but the essential ones are logical, numeric, and character.
+
+**Logical** Also known as boolean data, logical data is shown as TRUE or FALSE values:
+
+```{r}
+logical1 <- TRUE
+logical2 <- FALSE
+
+# The class() function outputs the data type of the object
+class(logical1)
+
+
+print(logical2)
+print(class(logical2))
+
+```
+
+**Numeric** represents all data types that are real numbers with or with out decimal points.
+
+```{r}
+
+height <- 5.5
+acres <- 1000
+
+class(height)
+
+
+print(acres)
+print(class(acres))
+
+
+```
+
+**Character** specifies character or string values in a variable such as a singular character 'A' or a string of characters in 'Apple'.
+
+```{r}
+
+# Use '' or "" to show it's a string of characters
+motorsports <- "formula1"
+
+print(motorsports)
+print(class(motorsports))
+
+
+```
+
+**Integer** specifies real values without decimal points
+
+```{r}
+
+
+# the suffix i specifies its imaginary data.
+complex <- 3 + 2i
+
+print(class(integer))
+
+```
+
+**Raw** specifies values as raw bytes
+
+```{r}
+
+# convert character to raw
+raw_variable <- charToRaw("Welcome to Programiz")
+
+print(raw_variable)
+print(class(raw_variable))
+
+# convert raw to character
+char_variable <- rawToChar(raw_variable)
+
+print(char_variable)
+print(class(char_variable))
+
+```

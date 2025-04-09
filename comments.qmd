@@ -1,0 +1,13 @@
+---
+title: "Comments"
+editor: visual
+---
+
+It's also important to annotate your code. It will help you write notes and explain what you are doing. To annotate your code, you will use the number sign #:
+
+```{r}
+
+# addition
+10 + 2
+# the answer is 12
+```

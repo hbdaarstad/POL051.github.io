@@ -1,0 +1,5 @@
+---
+title: "Why R?"
+---
+
+R is a coding language language and environment built for statistical computing and graphics that includes a large variety in statistical and graphical techniques. Essentially, R gives us as political scientists an effective way to store and handle data, and a large selection of data analysis tools including graphing tools in a coherent and effective language. R has its own "enviornment," an area for us to write the code and see outputs, but the majority of users will use Rstudio and IDE or integrated development environment. Rstudio is a software application with a code editor, compiler, debugger, and project manager in a single interface that allows us to write, edit, compile, and debug code in a singular location. Furthermore, in order to use R and Rstudio you will need to download both.

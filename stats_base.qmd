@@ -1,0 +1,81 @@
+---
+title: "Base R Descriptive Stats"
+editor: visual
+---
+
+First, let's find the minimum speed recorded and the maximum speed recorded during the fastest laps for each race. Since fastest lap time is a character we need to change it from a character to a numeric value and lets remove any NAs.
+
+```{r}
+library(RandomData)
+dat <- race_stats
+
+# change NA to 0s and to numeric
+dat$fastestLapSpeed <-as.numeric(
+    ifelse(dat$fastestLapSpeed >= 0, dat$fastestLapSpeed, 0)
+    )
+
+```
+
+-   Min and Max
+
+    ```{r}
+    min(dat$fastestLapSpeed)
+
+    max(dat$fastestLapSpeed)
+
+    range(dat$fastestLapSpeed)
+    ```
+
+-   Mean
+
+    -   The **mean** is average value of all the numbers in a set.
+
+```{r}
+
+mean(dat$fastestLapSpeed)
+
+```
+
+-   Median
+
+    -   The **median** is the middle value in a set of numbers when they are ordered from least to greatest.
+
+```{r}
+
+median(dat$fastestLapSpeed)
+
+```
+
+-   First and Third Quartiles
+
+    -   The **first quartile** range is the value under which 25 percent of the data points are found when they are arranged in increasing order, and the **third quartile** range is where 75 percent of the data points are found when they are arranged in increasing order
+
+```{r}
+
+quantile(dat$fastestLapSpeed, 0.25)
+
+quantile(dat$fastestLapSpeed, 0.75)
+
+```
+
+-   IQR
+
+    -   The **IQR** is the difference between the first and third quartile.
+
+```{r}
+
+IQR(dat$fastestLapSpeed)
+
+```
+
+-   Standard Deviation and Variance
+
+    -   **Variance** is the average squared difference between data points in a set, which measures how much the values in a set vary from each other. While **Standard Deviation** is the measure of how far the values in a set are from the mean
+
+```{r}
+
+sd(dat$fastestLapSpeed)
+
+var(dat$fastestLapSpeed)
+
+```

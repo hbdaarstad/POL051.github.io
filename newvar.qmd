@@ -1,0 +1,95 @@
+---
+title: "Creating New Variables"
+editor: visual
+---
+
+We can also add to our data sets! If we want to make a new variable, we can use the `mutate()`, which uses existing data to create new variables. The correct format of the function is the following, first is the new variable name and then an equal sign `=`, followed by how the new variable will be formed and what existing variables are used to make it.
+
+`mutate(new_column_name = function(old_variable_1))`
+
+In the example below, we calculate the average lap time by taking the total time for the driver to finish the race divided by the number of laps.
+
+```{r}
+
+library(tidyverse)
+library(RandomData)
+
+season_2023 <- race_stats |>
+  select(circuit, year, constructor, surname, time, laps) |>
+  filter(constructor == "McLaren" & year == 2023) |>
+  mutate(avg_laptime = sum(time)/laps)
+
+season_2023 |> 
+   select(circuit, year, constructor, surname, avg_laptime) |>
+   # remove duplicates
+   unique() |>
+   print()
+
+```
+
+If we wanted to make a new character variable we would use the `case_when()` in the `mutate()` function. In this example, I make a new variable based on the final position of the race for the two McLaren drivers, Piastri and Norris, in the 2023 season. I use the existing variables the circuit and surname to make this new variable.
+
+```{r}
+
+McLarenStandings_2023 <- race_stats |>
+  select(circuit, year, constructor, surname) |>
+  # remove duplicates
+  unique() |>
+  filter(constructor == "McLaren" & year == 2023) |>
+  mutate(
+    final_position = case_when(
+      #PIASTRI
+      circuit == "Bahrain International Circuit" & surname == "Piastri" ~ "DNF",
+      circuit == "Jeddah Corniche Circuit" & surname == "Piastri" ~ "15",
+      circuit == "Albert Park Grand Prix Circuit" & surname == "Piastri" ~ "8", 
+      circuit ==  "Baku City Circuit" & surname == "Piastri" ~ "11",
+      circuit ==  "Miami International Autodrome" & surname == "Piastri" ~ "19",
+      circuit == "Circuit de Monaco" & surname == "Piastri" ~ "10",
+      circuit == "Circuit de Barcelona-Catalunya" & surname == "Piastri" ~ "13",
+      circuit == "Circuit Gilles Villeneuve" & surname == "Piastri" ~ "11", 
+      circuit == "Red Bull Ring" & surname == "Piastri" ~ "16",
+      circuit == "Silverstone Circuit" & surname == "Piastri" ~ "4",
+      circuit == "Hungaroring" & surname == "Piastri" ~ "5",
+      circuit == "Circuit de Spa-Francorchamps" & surname == "Piastri" ~ "DNF",
+      circuit == "Circuit Park Zandvoort" & surname == "Piastri" ~ "9",
+      circuit == "Autodromo Nazionale di Monza" & surname == "Piastri" ~ "12",
+      circuit == "Marina Bay Street Circuit" & surname == "Piastri" ~ "7",
+      circuit == "Suzuka Circuit" & surname == "Piastri" ~ "3",
+      circuit == "Losail International Circuit" & surname == "Piastri" ~ "2",
+      circuit == "Circuit of the Americas" & surname == "Piastri" ~ "DNF",
+      circuit == "Autódromo Hermanos Rodríguez" & surname == "Piastri" ~ "8",
+      circuit == "Autódromo José Carlos Pace" ~ "14",
+      circuit == "Las Vegas Strip Street Circuit" & surname == "Piastri" ~ "10",
+      circuit == "Yas Marina Circuit" & surname == "Piastri" ~ "6",
+        
+        # NORRIS
+        circuit == "Bahrain International Circuit" & surname == "Norris" ~ "17",
+        circuit == "Jeddah Corniche Circuit" & surname == "Norris" ~ "17",
+        circuit == "Albert Park Grand Prix Circuit" & surname == "Norris" ~ "6",
+        circuit ==  "Baku City Circuit" & surname == "Norris" ~ "9",
+        circuit ==  "Miami International Autodrome" & surname == "Norris" ~ "17", 
+        circuit == "Circuit de Monaco" & surname == "Norris" ~ "9", 
+        circuit == "Circuit de Barcelona-Catalunya" & surname == "Norris" ~ "17", 
+        circuit == "Circuit Gilles Villeneuve" & surname == "Norris" ~ "13",
+        circuit == "Red Bull Ring" & surname == "Norris" ~ "4", 
+        circuit == "Silverstone Circuit" & surname == "Norris" ~ "2",
+        circuit == "Hungaroring" & surname == "Norris" ~ "2",
+        circuit == "Circuit de Spa-Francorchamps" & surname == "Norris" ~ "7",
+        circuit == "Circuit Park Zandvoort" & surname == "Norris" ~ "9",
+        circuit == "Autodromo Nazionale di Monza" & surname == "Norris" ~"8",
+        circuit == "Marina Bay Street Circuit" & surname == "Norris" ~ "2",
+        circuit == "Suzuka Circuit" & surname == "Norris" ~ "2",
+        circuit == "Losail International Circuit" & surname == "Norris" ~ "3",
+        circuit == "Circuit of the Americas" & surname == "Norris" ~ "3",
+        circuit == "Autódromo Hermanos Rodríguez" & surname == "Norris" ~ "5",
+        circuit == "Autódromo José Carlos Pace" ~ "2",
+        circuit == "Las Vegas Strip Street Circuit" & surname == "Norris" ~ "DNF",
+        circuit == "Yas Marina Circuit" & surname == "Norris" ~ "5"
+        )
+  ) 
+
+print(McLarenStandings_2023)
+
+```
+
+## 

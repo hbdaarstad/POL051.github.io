@@ -1,0 +1,138 @@
+---
+title: "Base R Descriptive Statistics"
+editor: visual
+---
+
+**Packages** are collections of R functions, data, and code compiled in a well-defined format. **R functions** are like the verbs of the R coding language, they tell your computer what action to make with sets of information. A function is usually defined by a keyword and then parenthesis. Functions can be built by yourself or pre-built.
+
+Some packages come pre-installed in R, hwoever, the majority do not, so you need to install them first using the r function `install.packages`
+
+```{r}
+#| eval: false
+#| include: true
+
+install.packages("tidyverse") # first install this package
+install.packages("remotes") # second install this package to download the data
+
+```
+
+After installing the packages we need to attach the package. You will always need to reattach the a package in order to use it when you restart R. You can do this by using the function `library()` and the name of the package.
+
+In the following examples we will be using a collection of data sets I have cleaned and you will download by using the following code:
+
+```{r}
+#| eval: false
+#| include: true
+# This line of code installs a data package saved on github that I
+# created
+remotes::install_github("hbdaarstad/RandomData")
+
+```
+
+```{r}
+#| include: false
+# attaches the packages
+library(tidyverse)
+library(RandomData)
+```
+
+Now, we can begin using functions found in the `tidyverse` package and data from my package `RandomData`. Let's work with our first data set, `race_stats`.
+
+```{r}
+?race_stats # description of the data
+```
+
+![](pictures/package_descriptions.png){width="100%"}
+
+## Picturing the Data
+
+The `head()` and `str()` allow us to get a snap shot of the data and see what is in it and what data types we are working with. `head()` shows us the first six observations of each variable, while `str()` shows us the structure of each variable.
+
+```{r}
+
+dat <- race_stats
+
+head(dat)  
+```
+
+```{r}
+str(dat) # structure of dataset
+
+```
+
+## Base R Descriptive Stat Functions
+
+First, let's find the minimum speed recorded and the maximum speed recorded during the fastest laps for each race. Since fastest lap time is a character we need to change it from a character to a numeric value and lets remove any NAs.
+
+```{r}
+
+# change NA to 0s and to numeric
+dat$fastestLapSpeed <-as.numeric(
+    ifelse(dat$fastestLapSpeed >= 0, dat$fastestLapSpeed, 0)
+    )
+
+```
+
+-   Min and Max
+
+    ```{r}
+    min(dat$fastestLapSpeed)
+
+    max(dat$fastestLapSpeed)
+
+    range(dat$fastestLapSpeed)
+    ```
+
+-   Mean
+
+    -   The **mean** is average value of all the numbers in a set.
+
+```{r}
+
+mean(dat$fastestLapSpeed)
+
+```
+
+-   Median
+
+    -   The **median** is the middle value in a set of numbers when they are ordered from least to greatest.
+
+```{r}
+
+median(dat$fastestLapSpeed)
+
+```
+
+-   First and Third Quartiles
+
+    -   The **first quartile** range is the value under which 25 percent of the data points are found when they are arranged in increasing order, and the **third quartile** range is where 75 percent of the data points are found when they are arranged in increasing order
+
+```{r}
+
+quantile(dat$fastestLapSpeed, 0.25)
+
+quantile(dat$fastestLapSpeed, 0.75)
+
+```
+
+-   IQR
+
+    -   The **IQR** is the difference between the first and third quartile.
+
+```{r}
+
+IQR(dat$fastestLapSpeed)
+
+```
+
+-   Standard Deviation and Variance
+
+    -   **Variance** is the average squared difference between data points in a set, which measures how much the values in a set vary from each other. While **Standard Deviation** is the measure of how far the values in a set are from the mean
+
+```{r}
+
+sd(dat$fastestLapSpeed)
+
+var(dat$fastestLapSpeed)
+
+```

@@ -1,0 +1,70 @@
+project:
+  type: website
+
+website:
+  title: "R for the Scientific Study of Politics"
+  site-url: "https://hbdaarstad.github.io/pol51_R/"
+  sidebar:
+    style: "floating"
+    search: true
+    contents:
+      - text: "Welcome!"
+        href: index.qmd
+      - section: "Introduction to R"
+        href: basics-summary.qmd
+        contents:
+          - whyr.qmd
+          - downloading.qmd
+      - section: "Setting up R"
+        herf: setup.qmd
+        contents:
+          - layout.qmd
+          - wd.qmd
+      - section: "Base R Syntax"
+        href: basicsyntax.qmd
+        contents:
+          - text.qmd
+          - calc.qmd
+          - comments.qmd
+          - objects.qmd
+          - data.qmd
+      - section: "Base R Descriptive Statistics"
+        href: baserstats.qmd
+        contents:
+          - packages.qmd
+          - picturing.qmd 
+          - stats_base.qmd
+      - section: "Base R Data Visualization"
+        href: baserviz.qmd
+        contents:
+          - scatter.qmd
+          - hist.qmd
+          - boxplot.qmd
+          - timeseries.qmd
+          - advcode.qmd
+      - section: "Tidyverse Descriptive Statistics"
+        href: tidystats.qmd
+        contents:
+          - filter.qmd
+          - newvar.qmd
+          - descstats.qmd
+      - section: "Tidyverse Data Visualization"
+        href: tidyviz.qmd
+        contents:
+          - tidyscatter.qmd
+          - tidyhist.qmd
+          - tidybar.qmd
+          - tidybox.qmd
+          - tidytime.qmd
+      - section: "Random Data Generation and Hypothesis Testing"
+        herk: hypothesis.qmd
+        contents:
+          - ttest.qmd
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+
+

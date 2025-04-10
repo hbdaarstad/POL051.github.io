@@ -531,7 +531,7 @@
     "href": "index.html",
     "title": "Welcome!",
     "section": "",
-    "text": "Welcome! This is a website that provides an overview of R for the POL 051: The Scientific Study of Politics Class at the University of California, Davis.\nThis provides an overview of what is R, setting up R, basic R syntax, Base R, and tidyverse to build a foundation to apply these tools to answer critical questions about Political Science.\nThis website is still understand construction at the moment, and there will be mistakes or things not included yet in the final sections. Furthermore, if you see any mistakes please let me know so I can adjust and fix them!",
+    "text": "Welcome! This is a website that provides an overview of R for the POL 051: The Scientific Study of Politics Class at the University of California, Davis.\nThis provides an overview of what is R, setting up R, basic R syntax, Base R, and tidyverse to build a foundation to apply these tools to answer critical questions about Political Science.\nThis website is still under construction at the moment, and there will be mistakes or things not included yet in the final sections. Furthermore, if you see any mistakes please let me know so I can adjust and fix them!",
     "crumbs": [
       "Welcome!"
     ]

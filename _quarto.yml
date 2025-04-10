@@ -1,9 +1,10 @@
 project:
   type: website
+  output-dir: docs
 
 website:
   title: "R for the Scientific Study of Politics"
-  site-url: "https://hbdaarstad.github.io/pol51_R/"
+  site-url: "http://POL051.github.io/"
   sidebar:
     style: "floating"
     search: true

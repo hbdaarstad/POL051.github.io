@@ -60,7 +60,12 @@ website:
       - section: "Random Data Generation and Hypothesis Testing"
         herk: hypothesis.qmd
         contents:
-          - ttest.qmd
+         - correlations.qmd
+         - ttest.qmd
+         - regressions.qmd
+         
+          
+      
 format:
   html:
     theme: cosmo

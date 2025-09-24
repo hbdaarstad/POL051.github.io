@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.553">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>R for the Scientific Study of Politics - T-Tests</title>
+<title>T-Tests – R for the Scientific Study of Politics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -69,10 +69,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-6bd9cfa162949bde0a231f530c97869d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -111,13 +111,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ttest.html">Random Data Generation and Hypothesis Testing</a></li><li class="breadcrumb-item"><a href="./ttest.html">T-Tests</a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./correlations.html">Random Data Generation and Hypothesis Testing</a></li><li class="breadcrumb-item"><a href="./ttest.html">T-Tests</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -149,7 +149,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="sidebar-item-container"> 
             <a href="./basics-summary.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction to R</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -170,9 +170,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
  <span class="menu-text">Setting up R</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -195,7 +195,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="sidebar-item-container"> 
             <a href="./basicsyntax.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Base R Syntax</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -236,7 +236,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="sidebar-item-container"> 
             <a href="./baserstats.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Base R Descriptive Statistics</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -265,7 +265,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="sidebar-item-container"> 
             <a href="./baserviz.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Base R Data Visualization</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -306,7 +306,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="sidebar-item-container"> 
             <a href="./tidystats.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Tidyverse Descriptive Statistics</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -335,7 +335,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="sidebar-item-container"> 
             <a href="./tidyviz.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Tidyverse Data Visualization</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -374,17 +374,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
  <span class="menu-text">Random Data Generation and Hypothesis Testing</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./correlations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./ttest.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">T-Tests</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regressions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear Regressions</span></a>
   </div>
 </li>
       </ul>
@@ -399,20 +411,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#example-2" id="toc-example-2" class="nav-link active" data-scroll-target="#example-2">Example 2:</a></li>
-  <li><a href="#data-generation" id="toc-data-generation" class="nav-link" data-scroll-target="#data-generation"><strong>Data Generation:</strong></a></li>
-  <li><a href="#hypothesis" id="toc-hypothesis" class="nav-link" data-scroll-target="#hypothesis"><strong>Hypothesis:</strong></a></li>
-  <li><a href="#interpreting-one-tailed-t-test-results" id="toc-interpreting-one-tailed-t-test-results" class="nav-link" data-scroll-target="#interpreting-one-tailed-t-test-results">Interpreting One-Tailed T-test Results</a></li>
-  <li><a href="#example-3" id="toc-example-3" class="nav-link" data-scroll-target="#example-3">Example 3</a></li>
-  <li><a href="#hypothesis-1" id="toc-hypothesis-1" class="nav-link" data-scroll-target="#hypothesis-1"><strong>Hypothesis:</strong></a></li>
-  <li><a href="#interpreting-two-tailed-t-test-results" id="toc-interpreting-two-tailed-t-test-results" class="nav-link" data-scroll-target="#interpreting-two-tailed-t-test-results">Interpreting Two-Tailed T-test Results:</a></li>
+  <li><a href="#example-1-one-tailed-t-test-in-positive-direction" id="toc-example-1-one-tailed-t-test-in-positive-direction" class="nav-link active" data-scroll-target="#example-1-one-tailed-t-test-in-positive-direction">Example 1: One-tailed t-test in Positive Direction</a></li>
+  <li><a href="#example-2-one-tailed-t-test-in-negative-direction" id="toc-example-2-one-tailed-t-test-in-negative-direction" class="nav-link" data-scroll-target="#example-2-one-tailed-t-test-in-negative-direction">Example 2: One-tailed t-test in Negative Direction</a></li>
+  <li><a href="#example-3-two-tailed-t-test" id="toc-example-3-two-tailed-t-test" class="nav-link" data-scroll-target="#example-3-two-tailed-t-test">Example 3: Two-tailed t-test</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ttest.html">Random Data Generation and Hypothesis Testing</a></li><li class="breadcrumb-item"><a href="./ttest.html">T-Tests</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./correlations.html">Random Data Generation and Hypothesis Testing</a></li><li class="breadcrumb-item"><a href="./ttest.html">T-Tests</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">T-Tests</h1>
 </div>
@@ -442,9 +450,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>If you expect Group 1 to have lower values than Group 2: <code>t.test(group1, group2, alternative = "less")</code></p></li>
 <li><p>If you’re testing for any difference without specifying a direction: <code>t.test(group1, group2, alternative = "two.sided")</code></p></li>
 </ol>
-<section id="example-1" class="level4">
-<h4 class="anchored" data-anchor-id="example-1">Example 1:</h4>
-<p>A political science research team conducted a study to evaluate the impact of a new voter mobilization campaign in two countries:&nbsp;<strong>Country 1</strong> and <strong>Country 2</strong>. The goal of the campaign was to increase voter turnout in elections, particularly among underrepresented groups. To assess the effectiveness of the campaign, the researchers established two groups in each country:</p>
+<section id="example-1-one-tailed-t-test-in-positive-direction" class="level3">
+<h3 class="anchored" data-anchor-id="example-1-one-tailed-t-test-in-positive-direction">Example 1: One-tailed t-test in Positive Direction</h3>
+<p>A political science research team conducted a study to evaluate the impact of a new voter mobilization campaign in two countries: <strong>Country 1</strong> and <strong>Country 2</strong>. The goal of the campaign was to increase voter turnout in elections, particularly among underrepresented groups. To assess the effectiveness of the campaign, the researchers established two groups in each country:</p>
 <ul>
 <li><p><strong>Treatment Group</strong>: Individuals who were exposed to the new voter mobilization campaign.</p></li>
 <li><p><strong>Control Group</strong>: Individuals who were not exposed to the campaign (received no special outreach or encouragement).</p></li>
@@ -504,7 +512,7 @@ mean of x mean of y
  50.90406  43.92453 </code></pre>
 </div>
 </div>
-<p>The results indicate that there is a&nbsp;<strong>statistically significant</strong>&nbsp;difference between the treatment and control groups in&nbsp;<strong>Country 1</strong>.</p>
+<p>The results indicate that there is a <strong>statistically significant</strong>&nbsp;difference between the treatment and control groups in <strong>Country 1</strong>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># printing results</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>countryB_ttest</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -524,42 +532,40 @@ mean of x mean of y
 </div>
 <p>The results for <strong>Country 2</strong> indicate an even stronger <strong>statistically significant</strong> difference between the treatment and control groups compared to <strong>Country 1</strong>.</p>
 </section>
-<section id="example-2" class="level3">
-<h3 class="anchored" data-anchor-id="example-2">Example 2:</h3>
-<p>A group of <strong>International Relations</strong> scholars is conducting a study to evaluate the effect of <strong>foreign aid</strong> on <strong>democratic engagement</strong> in developing countries. The scholars hypothesize that countries receiving <strong>foreign aid</strong> with conditions attached, such as promoting democratic reforms, will show l<strong>ower levels of political apathy</strong> and <strong>higher levels of civic participation</strong> compared to countries that do not receive such aid.</p>
+<section id="example-2-one-tailed-t-test-in-negative-direction" class="level3">
+<h3 class="anchored" data-anchor-id="example-2-one-tailed-t-test-in-negative-direction">Example 2: One-tailed t-test in Negative Direction</h3>
+<p>A group of <strong>International Relations</strong> scholars is conducting a study to evaluate the effect of <strong>foreign aid</strong> on <strong>democratic engagement</strong> in developing countries. The scholars hypothesize that countries receiving <strong>foreign aid</strong> with conditions attached, such as promoting democratic reforms, will show <strong>lower levels of government funding into public goods programs</strong> compared to countries that do not receive such aid.</p>
 <p>The research involves two groups:</p>
 <ul>
-<li><p><strong>Group 1 (Treatment Group)</strong>: Countries that received&nbsp;<strong>foreign aid with democratic promotion conditions</strong>&nbsp;(e.g., aid for governance reforms, anti-corruption measures, or election monitoring programs).</p></li>
-<li><p><strong>Group 2 (Control Group)</strong>: Countries that did not receive foreign aid or received aid without any democratic conditions.</p></li>
+<li><p><strong>Group 1 (Treatment Group)</strong>: Countries that received <strong>foreign aid</strong> (e.g., aid for health care, anti-corruption measures, or election monitoring programs).</p></li>
+<li><p><strong>Group 2 (Control Group)</strong>: Countries that did not receive foreign aid or received aid.</p></li>
 </ul>
-<p>The researchers expect that&nbsp;<strong>Group 1</strong>&nbsp;will have&nbsp;<strong>higher levels of democratic engagement</strong>&nbsp;(measured by indicators such as voter turnout, political knowledge, and civil liberties) than&nbsp;<strong>Group 2</strong>, which may not benefit from the same level of external pressure or support for democratic reforms.</p>
-</section>
-<section id="data-generation" class="level3">
-<h3 class="anchored" data-anchor-id="data-generation"><strong>Data Generation:</strong></h3>
+<p>The researchers expect that <strong>Group 1</strong> will see <strong>decreased funding for public goods programs</strong> than <strong>Group 2</strong>, which may not benefit from the same level of external support for public goods.</p>
+<ul>
+<li><strong>Data Generation:</strong></li>
+</ul>
 <p>To test this hypothesis, the research team randomly samples <strong>100 countries</strong> for each group, measuring <strong>voter turnout</strong> as a key indicator of democratic engagement in the most recent national elections. The data is simulated as follows:</p>
 <ol type="1">
 <li><p><strong>Group 1 (Treatment Group)</strong>:</p>
 <ul>
-<li><p><strong>Average Voter Turnout</strong>: 60% (mean score) with some variation (standard deviation = 10%).</p></li>
-<li><p>These countries received foreign aid with democratic promotion conditions.</p></li>
+<li><p><strong>Average Public Goods</strong>: 10.1 (mean in the millions for funded public goods) with some variation (standard deviation = 10%).</p></li>
+<li><p>These countries received foreign aid related to public goods.</p></li>
 </ul></li>
 <li><p><strong>Group 2 (Control Group)</strong>:</p>
 <ul>
-<li><p><strong>Average Voter Turnout</strong>: 50% (mean score) with some variation (standard deviation = 10%).</p></li>
-<li><p>These countries did not receive foreign aid with democratic promotion conditions.</p></li>
+<li><p><strong>Average Voter Turnout</strong>: 15.3 (mean in the millions for funded public goods) with some variation (standard deviation = 10%).</p></li>
+<li><p>These countries did not receive foreign aid related to public goods.</p></li>
 </ul></li>
 </ol>
-</section>
-<section id="hypothesis" class="level3">
-<h3 class="anchored" data-anchor-id="hypothesis"><strong>Hypothesis:</strong></h3>
 <ul>
-<li><p><strong>Null Hypothesis (H0)</strong>: There is no significant difference in voter turnout between countries that received aid with democratic promotion and those that did not.</p></li>
-<li><p><strong>Alternative Hypothesis (H1)</strong>: The treatment group (Group 1) has&nbsp;<strong>higher voter turnout</strong>&nbsp;than the control group (Group 2) due to the impact of foreign aid and democratic reforms (i.e., Group 1’s mean is greater than Group 2’s mean).</p></li>
+<li><p><strong>Hypothesis:</strong></p></li>
+<li><p><strong>Null Hypothesis (H0)</strong>: There is no significant difference in funding for public goods between countries that received aid and those that did not.</p></li>
+<li><p><strong>Alternative Hypothesis (H1)</strong>: The treatment group (Group 1) has <strong>decreased funding for public goods programs</strong> than the control group (Group 2) due to the impact of foreign aid (i.e., Group 1’s mean is greater than Group 2’s mean).</p></li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate random data for two groups</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>group1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">40</span>, <span class="at">sd =</span> <span class="dv">10</span>)  <span class="co"># Group 1 with mean 40 and sd 10</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>group2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">10</span>)  <span class="co"># Group 2 with mean 50 and sd 10</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>group1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="fl">10.1</span>, <span class="at">sd =</span> <span class="dv">10</span>)  <span class="co"># Group 1 with mean 40 and sd 10</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>group2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="fl">15.3</span>, <span class="at">sd =</span> <span class="dv">10</span>)  <span class="co"># Group 2 with mean 50 and sd 10</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Conducting t-tests</span></span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>ttest <span class="ot">&lt;-</span> <span class="fu">t.test</span>(group1, group2,</span>
@@ -571,50 +577,48 @@ mean of x mean of y
     Welch Two Sample t-test
 
 data:  group1 and group2
-t = -6.246, df = 197.46, p-value = 1.267e-09
+t = -2.7265, df = 197.46, p-value = 0.003488
 alternative hypothesis: true difference in means is less than 0
 95 percent confidence interval:
-      -Inf -6.264626
+      -Inf -1.464626
 sample estimates:
 mean of x mean of y 
- 41.05851  49.57700 </code></pre>
+ 11.15851  14.87700 </code></pre>
 </div>
 </div>
-</section>
-<section id="interpreting-one-tailed-t-test-results" class="level3">
-<h3 class="anchored" data-anchor-id="interpreting-one-tailed-t-test-results">Interpreting One-Tailed T-test Results</h3>
+<ul>
+<li>Interpreting One-Tailed T-test Results</li>
+</ul>
 <ol type="1">
-<li><p><strong>t-Value (t = -8.7109):</strong><br>
-The t-value is the test statistic that measures the difference between the sample means relative to the variation in the sample data. A larger absolute t-value indicates a more significant difference between the two groups. Here, the t-value of -8.7109 is quite large (in negative value), suggesting a substantial difference between the means of the two groups, with <strong>Group 1</strong> (mean = 38.50) being significantly lower than <strong>Group 2</strong> (mean = 51.06).</p></li>
-<li><p><strong>Degrees of Freedom (df = 197.94):</strong><br>
-The degrees of freedom (df) represent the number of independent values in the calculation. For the Welch Two Sample t-test, this value is based on the sample sizes and variances of both groups. In this case, the degrees of freedom is approximately 197.94.</p></li>
-<li><p><strong>p-Value (p-value = 5.988e-16):</strong><br>
-The p-value represents the probability of obtaining results as extreme as the observed results, assuming the null hypothesis is true. For a one-tailed test, a p-value less than 0.05 suggests that the observed difference is statistically significant in the specified direction. Here, the p-value is <strong>5.988e-16</strong>, which is far smaller than 0.05. This indicates that we can confidently reject the null hypothesis and conclude that the true difference in means is significantly less than zero—<strong>Group 1</strong> has lower values than <strong>Group 2</strong>.</p></li>
+<li><p><strong>t-Value (t = -4.5413):</strong><br>
+The t-value is the test statistic that measures the difference between the sample means relative to the variation in the sample data. A larger absolute t-value indicates a more significant difference between the two groups. Here, the t-value of -4.5413 is quite large (in negative value), suggesting a substantial difference between the means of the two groups, with <strong>Group 1</strong> (mean = 9.87) being significantly lower than <strong>Group 2</strong> (mean = 15.97).</p></li>
+<li><p><strong>Degrees of Freedom (df = 197.85):</strong><br>
+The degrees of freedom (df) represent the number of independent values in the calculation. For the Welch Two Sample t-test, this value is based on the sample sizes and variances of both groups. In this case, the degrees of freedom is approximately 197.85.</p></li>
+<li><p><strong>p-Value (p-value = 4.853e-06):</strong><br>
+The p-value represents the probability of obtaining results as extreme as the observed results, assuming the null hypothesis is true. For a one-tailed test, a p-value less than 0.05 suggests that the observed difference is statistically significant in the specified direction. Here, the p-value is <strong>4.853e-06</strong>, which is far smaller than 0.05. This indicates that we can confidently reject the null hypothesis and conclude that the true difference in means is significantly less than zero—<strong>Group 1</strong> has lower values than <strong>Group 2</strong>.</p></li>
 <li><p><strong>Alternative Hypothesis:</strong><br>
 The alternative hypothesis posits that the true difference in means is <strong>less than 0</strong>, meaning <strong>Group 1</strong> has a lower mean than <strong>Group 2</strong>. Given the extremely small p-value, there is strong evidence in support of this alternative hypothesis.</p></li>
-<li><p><strong>95% Confidence Interval (-Inf, -10.17328):</strong><br>
-The 95% confidence interval shows the range within which we are 95% confident that the true difference in means lies. In a one-tailed test, the interval is one-sided, extending from negative infinity to approximately <strong>-10.17</strong>. Since the interval does not include 0, this reinforces the conclusion that the mean of <strong>Group 1</strong> is significantly lower than the mean of <strong>Group 2</strong>.</p></li>
+<li><p><strong>95% Confidence Interval (-Inf, -3.880371):</strong><br>
+The 95% confidence interval shows the range within which we are 95% confident that the true difference in means lies. In a one-tailed test, the interval is one-sided, extending from negative infinity to approximately <strong>-3.88</strong>. Since the interval does not include 0, this reinforces the conclusion that the mean of <strong>Group 1</strong> is significantly lower than the mean of <strong>Group 2</strong>.</p></li>
 <li><p><strong>Sample Estimates:</strong></p>
 <ul>
-<li><p><strong>Mean of Group 1 (x)</strong>: 38.50</p></li>
-<li><p><strong>Mean of Group 2 (y)</strong>: 51.06</p></li>
+<li><p><strong>Mean of Group 1 (x)</strong>: 9.87</p></li>
+<li><p><strong>Mean of Group 2 (y)</strong>: 15.97</p></li>
 </ul></li>
 </ol>
 <p>The results indicate a strong <strong>statistically significant</strong> difference between the treatment and control groups, thus we can reject the null hypothesis.</p>
 </section>
-<section id="example-3" class="level3">
-<h3 class="anchored" data-anchor-id="example-3">Example 3</h3>
+<section id="example-3-two-tailed-t-test" class="level3">
+<h3 class="anchored" data-anchor-id="example-3-two-tailed-t-test">Example 3: Two-tailed t-test</h3>
 <p>A <strong>comparative politics</strong> research team is studying the impact of <strong>political system types</strong> (democracy vs.&nbsp;authoritarianism) on <strong>citizen satisfaction with governance</strong>. The team is specifically interested in understanding if there is a significant difference in how citizens from democratic countries (Group 1) and authoritarian countries (Group 2) perceive their government’s performance, particularly in terms of economic stability, personal freedoms, and governance effectiveness.</p>
 <p>To explore this, the researchers conducted a survey asking citizens from two sets of countries:</p>
 <ul>
 <li><p><strong>Group 1 (Democratic Countries)</strong>: Citizens from countries with democratic systems.</p></li>
 <li><p><strong>Group 2 (Authoritarian Countries)</strong>: Citizens from countries with authoritarian systems.</p></li>
 </ul>
-<p>The <strong>survey scale</strong> measures&nbsp;<strong>satisfaction</strong>&nbsp;with governance on a scale from 0 to 100, where higher values indicate greater satisfaction with the government’s performance.</p>
-</section>
-<section id="hypothesis-1" class="level3">
-<h3 class="anchored" data-anchor-id="hypothesis-1"><strong>Hypothesis:</strong></h3>
+<p>The <strong>survey scale</strong> measures <strong>satisfaction</strong> with governance on a scale from 0 to 100, where higher values indicate greater satisfaction with the government’s performance.</p>
 <ul>
+<li><p><strong>Hypothesis:</strong></p></li>
 <li><p><strong>Null Hypothesis (H0)</strong>: There is no significant difference in <strong>citizen satisfaction</strong> between democratic and authoritarian countries (i.e., the means are equal).</p></li>
 <li><p><strong>Alternative Hypothesis (H1)</strong>: There is a significant difference in <strong>citizen satisfaction</strong> between democratic and authoritarian countries (i.e., the means are different).</p></li>
 </ul>
@@ -642,9 +646,9 @@ mean of x mean of y
  41.50356  46.05874 </code></pre>
 </div>
 </div>
-</section>
-<section id="interpreting-two-tailed-t-test-results" class="level3">
-<h3 class="anchored" data-anchor-id="interpreting-two-tailed-t-test-results">Interpreting Two-Tailed T-test Results:</h3>
+<ul>
+<li>Interpreting Two-Tailed T-test Results:</li>
+</ul>
 <ol type="1">
 <li><p><strong>t-Value (t = -0.59518)</strong>:<br>
 The t-value is the test statistic for the t-test, which measures how large the difference between the two groups is relative to the variability in the sample data. A larger absolute t-value indicates a more significant difference. In this case, the t-value of <strong>-0.59518</strong> is relatively small, suggesting that there is no substantial difference between the two groups.</p></li>
@@ -703,18 +707,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -746,7 +739,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp("http:\/\/POL051\.github\.io\/");
@@ -754,7 +767,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -851,7 +864,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

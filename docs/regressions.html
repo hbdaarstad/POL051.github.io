@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Basic Calculations – R for the Scientific Study of Politics</title>
+<title>Linear Regressions – R for the Scientific Study of Politics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -101,6 +101,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -114,7 +143,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./basicsyntax.html">Base R Syntax</a></li><li class="breadcrumb-item"><a href="./calc.html">Basic Calculations</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./correlations.html">Random Data Generation and Hypothesis Testing</a></li><li class="breadcrumb-item"><a href="./regressions.html">Linear Regressions</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -208,7 +237,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./calc.html" class="sidebar-item-text sidebar-link active">
+  <a href="./calc.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Basic Calculations</span></a>
   </div>
 </li>
@@ -395,7 +424,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./regressions.html" class="sidebar-item-text sidebar-link">
+  <a href="./regressions.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Linear Regressions</span></a>
   </div>
 </li>
@@ -406,15 +435,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#ols" id="toc-ols" class="nav-link active" data-scroll-target="#ols">OLS</a></li>
+  <li><a href="#multivariate-linear-regressions" id="toc-multivariate-linear-regressions" class="nav-link" data-scroll-target="#multivariate-linear-regressions">Multivariate Linear Regressions</a></li>
+  <li><a href="#prediction" id="toc-prediction" class="nav-link" data-scroll-target="#prediction">Prediction</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./basicsyntax.html">Base R Syntax</a></li><li class="breadcrumb-item"><a href="./calc.html">Basic Calculations</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./correlations.html">Random Data Generation and Hypothesis Testing</a></li><li class="breadcrumb-item"><a href="./regressions.html">Linear Regressions</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Basic Calculations</h1>
+<h1 class="title">Linear Regressions</h1>
 </div>
 
 
@@ -431,36 +468,328 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>R at its core is a gigantic calculator, so let’s practice doing basic calculations.</p>
+<section id="ols" class="level3">
+<h3 class="anchored" data-anchor-id="ols">OLS</h3>
+<p><strong>OLS (Ordinary Least Squares)</strong> helps us fit a line to the data to best explain how one variable (X) affects another variable (Y)</p>
+<p>Linear regression is the most commonly used approach for modeling</p>
+<ul>
+<li><p>It involves a numerical outcome variable, y, and explanatory variables, x, that are either numerical or categorical.</p></li>
+<li><p>We assume the relationship between X and Y is linear (a line) Useful for prediction and explanation.</p></li>
+</ul>
+<p><span class="math display">\[
+Y_i = \alpha + \beta X + u_i
+\]</span></p>
+<p>We use sample data to make inferences about the population of interest, therefore our regression formula is:</p>
+<p><span class="math display">\[
+\hat Y_i = \hat\alpha + \hat\beta X + \hat u_i
+\]</span></p>
+<p>The hat (^) are indicators of a sample data not the true population estimate.</p>
+<ul>
+<li><p>Y: dependent, outcome variable</p></li>
+<li><p>X: independent, explanatory variable</p></li>
+<li><p>𝜶&nbsp; and β: are the parameter estimates</p>
+<ul>
+<li><p>𝜶 : The predicted value of Y when X= 0 (intercept)</p></li>
+<li><p>β: how much Y changes for a one-unit increase in X (slope)</p></li>
+</ul></li>
+</ul>
+<p>We use linear regressions to estimate how x changes are y! Therefore, how we interpret the estimate, β, is determined by whether our x value is a categorical or continuous variable.</p>
+<p>Here is the formula to Interpreting Regressions:</p>
+<ul>
+<li><p>Continuous Variable -&gt; Look at the slope!</p>
+<ul>
+<li><p>When X increases 1 unit, Y increases by 𝛽</p></li>
+<li><p>Usually, you can ignore the intercept The intercept is the average value of Y when X =0.</p></li>
+</ul></li>
+<li><p>Dummy/Categorical Variable -&gt; Compare it with the baseline category (aka intercept)</p>
+<ul>
+<li><p>When X is in the given category, average Y value is higher by 𝛽 compared to the average Y value for baseline X.</p></li>
+<li><p>The intercept is the average Y value for the baseline category.</p></li>
+</ul></li>
+</ul>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Approach</th>
+<th>Interpetation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Continious</td>
+<td>A one unit increase in X, SLOPE unit change in Y.</td>
+<td>For every ___ (replace with unit value) increase in ___ (replace with X value) results in ___ (replace with estimate/slope) unit change in ___ (replace with Y, or outcome value)</td>
+</tr>
+<tr class="even">
+<td>Categorical</td>
+<td>The category is SLOPE unites higher/lower than the intercept.</td>
+<td>The ___ (replace with categorical value) is ___ (replace with estimate/slope) higher/lower than ___ (replace with baseline/intercept)</td>
+</tr>
+</tbody>
+</table>
+<p>The function to calculate this in R is: <code>lm()</code></p>
+<p>Example:</p>
+<p>I will be using the same randomly generated data as the correlations examples.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># addition</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="sc">+</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.2     ✔ tibble    3.3.0
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.1.0     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">18</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>gender <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>), <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)  <span class="co"># 1 = Female, 0 = Male</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>kids <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Now build the data.frame with dependent vars defined inline</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> age,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">gender =</span> gender,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">height =</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="fl">5.5</span>, <span class="at">sd =</span> <span class="fl">0.75</span>) <span class="sc">+</span> gender <span class="sc">*</span> <span class="sc">-</span><span class="fl">0.25</span>,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">kids =</span> kids,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">income =</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">45000</span>, <span class="at">sd =</span> <span class="dv">10000</span>) <span class="sc">+</span> age <span class="sc">*</span> <span class="dv">1000</span> <span class="sc">+</span> gender <span class="sc">*</span> (<span class="sc">-</span><span class="dv">2000</span>) <span class="sc">+</span> kids <span class="sc">*</span> (<span class="sc">-</span><span class="dv">3000</span>),</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">years_edu =</span> <span class="fu">sample</span>(<span class="dv">10</span><span class="sc">:</span><span class="dv">23</span>, <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> age <span class="sc">*</span> <span class="dv">1</span> <span class="sc">+</span> gender <span class="sc">*</span> <span class="dv">2</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 12</code></pre>
+<pre><code>  age gender   height kids    income years_edu
+1  48      1 4.578477    1  82225.32        63
+2  96      1 4.266899    2 153024.83       121
+3  68      0 6.997910    0 113667.01        89
+4  31      1 5.700532    0  92668.52        49
+5  84      0 4.561546    4 103490.97        97
+6  59      0 5.041626    4  92209.84        81</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># subtraction</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="sc">-</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>First, we will doing a simple linear regression with only one X value. Y is our outcome variable and X is our explantory variable. it will look like the following:</p>
+<p><code>lm(y ~ x, data)</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># categorical interpetation</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(height <span class="sc">~</span> gender, data)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 8</code></pre>
+<pre><code>
+Call:
+lm(formula = height ~ gender, data = data)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.40414 -0.47142 -0.07808  0.44609  1.70882 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  5.51099    0.09734  56.616   &lt;2e-16 ***
+gender      -0.17425    0.14352  -1.214    0.228    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.7153 on 98 degrees of freedom
+Multiple R-squared:  0.01482,   Adjusted R-squared:  0.004766 
+F-statistic: 1.474 on 1 and 98 DF,  p-value: 0.2276</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># multipilication</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="sc">*</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Our estimate, how much x changes y, is <strong>-0.17</strong>, and our baseline, Male’s height, is <strong>5.51</strong> feet, which we can interpret as the following:</p>
+<p>Men are on average <strong>5.51</strong> feet high, and women are on average <strong>0.17 feet shorter</strong> than Men.</p>
+<p>However, we can not say according to our data that gender is correlated with height, since according to our P-value column, our <strong>p-value is 0.228</strong>, which is more than 0.05.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># continious interpetation</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(income <span class="sc">~</span> age, data)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 20</code></pre>
+<pre><code>
+Call:
+lm(formula = income ~ age, data = data)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-28480.3  -7731.4    436.7   7645.8  30540.6 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 34967.79    3405.90   10.27   &lt;2e-16 ***
+age          1045.02      53.15   19.66   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 12550 on 98 degrees of freedom
+Multiple R-squared:  0.7977,    Adjusted R-squared:  0.7957 
+F-statistic: 386.5 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># division</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span><span class="sc">/</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We want to look at the column with the estimate first, this tells us our intercept and estimate.</p>
+<p>Our estimate, how much x changes y, is <strong>1045.02</strong>, and our intercept is <strong>34,967.79</strong>, which we can interpret as the following:</p>
+<p>At 18 years old (which is the lowest age we have), income is <strong>34,967.79</strong>, and for every year older, an individuals income increases by <strong>1045.02</strong> dollars.</p>
+<p>In additon, we can say according to our data that age is correlated with income, since according to our P-value column, our <strong>p-value is &lt;2e-16</strong>, which is less than 0.05.</p>
+<p>In addition you can see *** after our p-value, this tells us the level of significance, the more stars the stronger the significance.</p>
+</section>
+<section id="multivariate-linear-regressions" class="level3">
+<h3 class="anchored" data-anchor-id="multivariate-linear-regressions">Multivariate Linear Regressions</h3>
+<p>Now, we have just been looking at one explanatory variable, however, you may want to look are more than one and also consider that there maybe outside influence that you need to control for.</p>
+<p>Furthermore, you may want to add more x variables. To do this, you can do the following:</p>
+<p><code>lm(y ~ x1 + x2 + x3 + ... + xn , data)</code></p>
+<p>Now, lets look at an example, but first, lets make some random generated data real quick!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># What if we have a confounding variable?</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># This will be our confounding variable</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>weekly_exercise <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>,<span class="dv">5</span>,<span class="dv">2</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># lets make our new dataframe</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>df_confound <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">income_scale =</span> (<span class="fu">rnorm</span>(<span class="dv">100</span>,<span class="dv">30000</span>,<span class="dv">10000</span>) <span class="sc">+</span> <span class="dv">10000</span><span class="sc">*</span>weekly_exercise)<span class="sc">/</span><span class="dv">1000</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>                      <span class="at">age =</span> <span class="fu">rnorm</span>(<span class="dv">100</span>,<span class="dv">35</span>,<span class="dv">10</span>),</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>                      <span class="co"># this is another function that creats a binary variable based on probability </span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>                      <span class="at">female =</span> <span class="fu">rbinom</span>(<span class="dv">100</span>,<span class="dv">1</span>,.<span class="dv">5</span>),</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>                      <span class="at">heart_health =</span> <span class="dv">60</span> <span class="sc">+</span> <span class="dv">10</span><span class="sc">*</span>weekly_exercise <span class="sc">-</span> <span class="dv">1</span><span class="sc">*</span>age <span class="sc">+</span> <span class="dv">8</span><span class="sc">*</span>female <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>,<span class="dv">0</span>,<span class="dv">10</span>))</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co"># regression model</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(heart_health <span class="sc">~</span> income_scale <span class="sc">+</span> age <span class="sc">+</span> female, df_confound)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 5</code></pre>
+<pre><code>
+Call:
+lm(formula = heart_health ~ income_scale + age + female, data = df_confound)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-25.394  -8.562  -0.513   8.813  36.603 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  51.69599    6.64099   7.784 8.10e-12 ***
+income_scale  0.72808    0.05986  12.162  &lt; 2e-16 ***
+age          -0.91499    0.12930  -7.077 2.41e-10 ***
+female        7.54097    2.80779   2.686  0.00853 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 13.21 on 96 degrees of freedom
+Multiple R-squared:   0.68, Adjusted R-squared:   0.67 
+F-statistic: 67.99 on 3 and 96 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># exponent</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span><span class="sc">^</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># visual</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>df_confound <span class="sc">|&gt;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> income_scale, <span class="at">y =</span> heart_health)) <span class="sc">+</span> </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="regressions_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Okay! There is something wrong with this model yes? We know income scale doesn’t actually impact heart health, rather this is done through weekly exercise! To take this into account we can do the following:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>model.fix <span class="ot">&lt;-</span> <span class="fu">lm</span>(heart_health <span class="sc">~</span> weekly_exercise <span class="sc">+</span> income_scale <span class="sc">+</span> age <span class="sc">+</span> female,df_confound)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model.fix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 100</code></pre>
+<pre><code>
+Call:
+lm(formula = heart_health ~ weekly_exercise + income_scale + 
+    age + female, data = df_confound)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-24.8789  -7.5206  -0.6986   7.2529  25.7713 
+
+Coefficients:
+                Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)     61.75064    5.56561  11.095  &lt; 2e-16 ***
+weekly_exercise  9.62967    1.34813   7.143 1.84e-10 ***
+income_scale     0.01537    0.11096   0.139     0.89    
+age             -1.01886    0.10584  -9.626 1.04e-15 ***
+female           9.36947    2.29096   4.090 9.04e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 10.71 on 95 degrees of freedom
+Multiple R-squared:  0.7918,    Adjusted R-squared:  0.783 
+F-statistic: 90.32 on 4 and 95 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df_confound <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>weekly_exercise,<span class="at">y =</span> heart_health)) <span class="sc">+</span> </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># lets add a line based on using a linear regression</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span><span class="st">"lm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="regressions_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
+</div>
+<p>Now, income is no longer correlated!</p>
+</section>
+<section id="prediction" class="level3">
+<h3 class="anchored" data-anchor-id="prediction">Prediction</h3>
+<p>We can also use linear regressions to make predictions. Using the <code>crossing()</code> and <code>augment()</code> functions, we can predict an outcome using our new models.</p>
+<p>Lets use our model from our last example. In the crossing function we put our values from our hypothetical person, and then using the augment function it calculates our predicted heart health from our values and our model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("broom")</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(heart_health <span class="sc">~</span> weekly_exercise <span class="sc">+</span> age <span class="sc">+</span> female,df_confound)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model.fix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = heart_health ~ weekly_exercise + income_scale + 
+    age + female, data = df_confound)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-24.8789  -7.5206  -0.6986   7.2529  25.7713 
+
+Coefficients:
+                Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)     61.75064    5.56561  11.095  &lt; 2e-16 ***
+weekly_exercise  9.62967    1.34813   7.143 1.84e-10 ***
+income_scale     0.01537    0.11096   0.139     0.89    
+age             -1.01886    0.10584  -9.626 1.04e-15 ***
+female           9.36947    2.29096   4.090 9.04e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 10.71 on 95 degrees of freedom
+Multiple R-squared:  0.7918,    Adjusted R-squared:  0.783 
+F-statistic: 90.32 on 4 and 95 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>scen <span class="ot">&lt;-</span> <span class="fu">crossing</span>(<span class="at">weekly_exercise =</span> <span class="dv">10</span>, <span class="at">age =</span> <span class="dv">35</span>, <span class="at">female =</span> <span class="dv">1</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">augment</span>(model, <span class="at">newdata =</span> scen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+  weekly_exercise   age female .fitted
+            &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+1              10    35      1    134.</code></pre>
+</div>
+</div>
+<p>Our predicted heart health is <strong>130.0878</strong>.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
